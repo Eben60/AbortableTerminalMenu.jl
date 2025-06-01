@@ -2,7 +2,7 @@
 *.jl.*.cov
 *.jl.cov
 .vscode/
-/Manifest*.toml
+**/Manifest*.toml
 auxillary
 lcov.info
 src/tmp*

@@ -3,5 +3,9 @@ uuid = "e793e0fa-3e97-48b3-86ee-231cf22fe7ee"
 authors = ["Eben60"]
 version = "0.0.1"
 
+[deps]
+REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+
 [compat]
+REPL = "<0.0.1, 1"
 julia = "1.10"
