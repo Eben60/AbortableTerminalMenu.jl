@@ -1,0 +1,9 @@
+**/.DS_Store
+*.jl.*.cov
+*.jl.cov
+.vscode/
+/Manifest*.toml
+auxillary
+lcov.info
+src/tmp*
+tmp*

@@ -1,0 +1,7 @@
+name = "AbortableTerminalMenu"
+uuid = "e793e0fa-3e97-48b3-86ee-231cf22fe7ee"
+authors = ["Eben60"]
+version = "0.0.1"
+
+[compat]
+julia = "1.10"
