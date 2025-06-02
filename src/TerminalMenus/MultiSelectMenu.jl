@@ -20,10 +20,8 @@ function AbortableMultiConfig(;
     return AbortableMultiConfig(Config(; charset=charset, kwargs...), checked, unchecked)
 end
 
-export AbortableMultiConfig
 
-
-function REPL.TerminalMenus.MultiSelectMenu(config::AbortableMultiConfig, options::Array{String,1}; pagesize::Int=10, selected=Int[], warn::Bool=true, kwargs...)
+function REPL.TerminalMenus.MultiSelectMenu(::AbortableMultiConfig, options::Array{String,1}; pagesize::Int=10, selected=Int[], warn::Bool=true, kwargs...)
     length(options) < 1 && error("MultiSelectMenu must have at least one option")
 
     # if pagesize is -1, use automatic paging
@@ -51,4 +49,15 @@ function REPL.TerminalMenus.writeline(buf::IOBuffer, menu::MultiSelectMenu{Abort
     print(buf, replace(menu.options[idx], "\n" => "\\n"))
 end
 
-REPL.TerminalMenus.cancel(m::MultiSelectMenu{AbortableMultiConfig}) = (m.selected = Set{Int64}([-1]))
+REPL.TerminalMenus.cancel(m::MultiSelectMenu{AbortableMultiConfig}) = (m.selected = Set{Int64}([0]))
+
+
+"""
+    AbortableMultiSelectMenu(args...; kwargs) :: REPL.TerminalMenus.MultiSelectMenu{AbortableMultiConfig}
+
+Based on and similar to `MultiSelectMenu` of `REPL.TerminalMenus`, with just one difference in behavior: 
+Whereas `request(::MultiSelectMenu)` would return an empty `Set` both if cancelled and if no items were selected,
+`request(::MultiSelectMenu{AbortableMultiConfig})` would return Set([0])) on cancel.
+"""
+AbortableMultiSelectMenu(options::Array{String,1}; pagesize::Int=10, selected=Int[], warn::Bool=true, kwargs...) =
+    MultiSelectMenu(AbortableMultiConfig(), options; pagesize, selected, warn, kwargs...)
